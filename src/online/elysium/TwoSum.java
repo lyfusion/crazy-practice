@@ -1,4 +1,4 @@
-package main.java.online.elysium;
+package online.elysium;
 
 class TwoSum {
 

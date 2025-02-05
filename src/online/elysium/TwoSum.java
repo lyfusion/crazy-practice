@@ -1,20 +1,23 @@
 package online.elysium;
 
+import java.util.HashMap;
+import java.util.Map;
+
 class TwoSum {
 
     public int[] twoSum(int[] nums, int target) {
-        if (nums == null) {
-            return null;
+        Map<Integer, Integer> indices = new HashMap<>();
+        
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            
+            if (indices.containsKey(complement)) {
+                return new int[] { indices.get(complement), i };
+            }
+
+            indices.put(nums[i], i);
         }
 
-        int length = nums.length;
-        if (length < 2) {
-            return null;
-        }
-
-        int i = 0;
-        int j = 0;
-
-        return new int[]{0, 1};
+        return null;
     }
 }

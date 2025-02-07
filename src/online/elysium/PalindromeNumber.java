@@ -6,13 +6,14 @@ public class PalindromeNumber {
             return false;
         }
 
-        String s = String.valueOf(x);
-        for (int i = 0; i < s.length() / 2; i++) {
-            if (s.charAt(i) != s.charAt(s.length() - 1 - i)) {
-                return false;
-            }
+        long reserved = 0;
+        int temp = x;
+
+        while (temp > 0) {
+            reserved = reserved * 10 + temp % 10;
+            temp /= 10;
         }
 
-        return true;
+        return (int)reserved == x;
     }
 }

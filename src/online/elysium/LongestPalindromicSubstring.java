@@ -2,29 +2,35 @@ package online.elysium;
 
 public class LongestPalindromicSubstring {
     public String longestPalindrome(String s) {
+        if (s == null || s.length() < 1) {
+            return "";
+        }
 
-        // babad
-        // cbbd
-        char[] chars = s.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            int size = chars.length - i;
-            for (int j = 0; j < i + 1; j++) {
-                if (isPalindrome(s.substring(j, j + size))) {
-                    return s.substring(j, j + size);
-                }
+        int start = 0;
+        int end = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int len1 = expandAroundCenter(s, i, i);
+            int len2 = expandAroundCenter(s, i, i + 1);
+            int len = Math.max(len1, len2);
+
+            if (len > end - start + 1) {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
             }
         }
-        
-        return "";
+
+        return s.substring(start, end + 1);
     }
 
-    private boolean isPalindrome(String s) {
-        for (int i = 0; i < s.length() / 2; i++) {
-            if (s.charAt(i) != s.charAt(s.length() - 1 - i)) {
-                return false;
-            }
+    private int expandAroundCenter(String s, int left, int right) {
+        int L = left;
+        int R = right;
+
+        while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
+            L -= 1;
+            R += 1;
         }
 
-        return true;
+        return R - L - 1;
     }
 }

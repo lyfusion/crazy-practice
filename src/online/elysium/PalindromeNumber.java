@@ -6,14 +6,14 @@ public class PalindromeNumber {
             return false;
         }
 
-        long reserved = 0;
+        long reservedHalf = 0;
         int temp = x;
 
-        while (temp > 0) {
-            reserved = reserved * 10 + temp % 10;
+        while (temp > reservedHalf) {
+            reservedHalf = reservedHalf * 10 + temp % 10;
             temp /= 10;
         }
 
-        return (int)reserved == x;
+        return temp == reservedHalf || temp == reservedHalf / 10;
     }
 }
